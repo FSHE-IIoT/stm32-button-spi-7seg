@@ -1,0 +1,12 @@
+# STM32CubeIDE
+Debug/
+Release/
+.settings/
+
+# Общие временные файлы
+*.o
+*.su
+*.elf
+*.bin
+*.hex
+*.map
