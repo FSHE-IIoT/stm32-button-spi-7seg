@@ -1,10 +1,5 @@
 # STM32 Button SPI Counter
 
-**Choose your language / Выберите язык :**
-
-*   [English](README.md)
-*   [Русский](README.ru.md)
-
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![STM32CubeIDE](https://img.shields.io/badge/IDE-STM32CubeIDE-%230052b1.svg?logo=stmicroelectronics)](https://www.st.com/en/development-tools/stm32cubeide.html)
 [![STM32F4](https://img.shields.io/badge/MCU-STM32F4-%23032671.svg?logo=stmicroelectronics)](https://www.st.com/en/microcontrollers-microprocessors/stm32f4-series.html)
