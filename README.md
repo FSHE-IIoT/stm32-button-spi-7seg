@@ -9,60 +9,59 @@
 [![STM32CubeIDE](https://img.shields.io/badge/IDE-STM32CubeIDE-%230052b1.svg?logo=stmicroelectronics)](https://www.st.com/en/development-tools/stm32cubeide.html)
 [![STM32F4](https://img.shields.io/badge/MCU-STM32F4-%23032671.svg?logo=stmicroelectronics)](https://www.st.com/en/microcontrollers-microprocessors/stm32f4-series.html)
 
-Проект для микроконтроллера STM32, реализующий счётчик нажатий кнопки с выводом значения на трёхразрядный семисегментный индикатор с помощью SPI и динамической индикации.
+A project for the STM32 microcontroller that implements a button press counter, displaying the value on a three-digit seven-segment display using SPI and dynamic indication.
 
-<!-- Если есть фото или видео работы проекта - вставьте тут -->
-<!-- ![Демонстрация работы](docs/demo.gif) -->
+![Button Press Counter](Docs/btn_counter.jpg)
 
-## 📋 Оглавление
+[Demo Video](Docs/btn_counter.mp4)
 
-- [О проекте](#-о-проекте)
-- [Используемая периферия и технологии](#-используемая-периферия-и-технологии)
-- [Схема подключения](#-схема-подключения)
-- [Сборка и запуск](#-сборка-и-запуск)
-- [Структура проекта](#-структура-проекта)
-- [Автор](#-автор)
-- [Лицензия](#-лицензия)
+## 📋 Table of Contents
 
-## 🚀 О проекте
+- [About the Project](#about-the-project)
+- [Used Peripherals and Technologies](#used-peripherals-and-technologies)
+- [Connection Diagram](#connection-diagram)
+- [Build and Run](#build-and-run)
+- [Project Structure](#project-structure)
+- [Author](#author)
+- [License](#license)
 
-Данный проект демонстрирует работу с:
-*   **Внешними прерываниями (EXTI)** для обработки нажатий кнопки.
-*   **Интерфейсом SPI** для управления сдвиговым регистром 74HC595.
-*   **Динамической индикацией** для вывода числа на трёхразрядный индикатор.
-*   **Драйвером HAL** от STMicroelectronics.
+## 🚀 About the Project
 
-При каждом нажатии кнопки значение счётчика увеличивается (от 0 до 999, затем сбрасывается). Текущее значение отображается на индикаторе.
+This project demonstrates the use of:
+*   **External interrupts (EXTI)** for handling button presses.
+*   **The SPI interface** for controlling a 74HC595 shift registe.
+*   **Dynamic multiplexing** for displaying a number on a three-digit display.
+*   **The HAL driver** from STMicroelectronics.
 
-## 🛠 Используемая периферия и технологии
+On each button press, the counter value increments (from 0 to 999, then it resets). The current value is displayed on the indicator.
 
-*   **Микроконтроллер:** STM32F401CCU6 (но может работать и на других сериях) в составе набора конструктора [MCUINSIDE v 1.0] (https://electronics-krd.ru/magazin/product/stmf401)
-*   **Периферия МК (на плате набора, но можно подключить на макетной плате):**
-    *   GPIO (Кнопка, LED, управление разрядами индикатора)
-    *   EXTI (Внешнее прерывание по кнопке)
-    *   SPI (Передача данных на индикатор)
-*   **Внешние компоненты (на плате набора, но можно подключить на макетной плате):**
-    *   Кнопка
-    *   Светодиод (индикация нажатия)
-    *   Трёхразрядный семисегментный индикатор и сдвиговый регистр .
-*   **Среда разработки:** STM32CubeIDE
-*   **Фреймворк:** STM32CubeF4 HAL
-*   **Язык:** C
+## 🛠 Used Peripherals and Technologies
 
-## 🔌 Схема подключения
+*   **Microcontroller:** STM32F401CCU6 (but it can also work on other series) as part of the constructor kit [MCUINSIDE v 1.0] (https://electronics-krd.ru/magazin/product/stmf401)
+*   **MCU Peripherals (on the kit's board, but can be connected on a breadboard):**
+    *   GPIO (Button, LED, controlling display digits)
+    *   EXTI (External interrupt from the button)
+    *   SPI (Data transmission to the display)
+*   **External Components (on the kit's board, but can be connected on a breadboard):**
+    *   Button
+    *   LED (for press indication)
+    *   Three-digit seven-segment display and a shift register.
+*   **Development Environment:** STM32CubeIDE
+*   **Framework:** STM32CubeF4 HAL
+*   **Language:** C
 
-<!-- Опишите или прикрепите изображение схемы. Это КРИТИЧЕСКИ важный раздел! -->
+## 🔌 Connection Diagram
 
-| Компонент | Контакт STM32 |Контакт 74HC595P | Контакт FJ3361H |
+| Component | STM32 Pin |74HC595 Pin | FJ3361H Pin |
 | :--- | :--- | :--- | :--- |
-| Кнопка | PA3 (EXTI3) | - | - |
-| Светодиод (LED) | PA5 | - | - |
+| Button | PA3 (EXTI3) | - | - |
+| LED (LED) | PA5 | - | - |
 | SPI3_SCK | PB3 | SHCP | - |
 | SPI3_MOSI | PB5 | DS | - |
 | Chip Select (SC) | PB4 | STCP | - |
-| Разряд "Единицы" | PB10 | - | 3 |
-| Разряд "Десятки" | PB2 | - | 2 |
-| Разряд "Сотни" | PB1 | - | 1 |
+| Units Digit | PB10 | - | 3 |
+| Tens Digit | PB2 | - | 2 |
+| Hundreds Digit | PB1 | - | 1 |
 | | | Q0 | A |
 | | | Q1 | B |
 | | | Q2 | C |
@@ -72,85 +71,85 @@
 | | | Q6 | G |
 | | | Q7 | P |
 
+## 🛠 Build and Run
 
-## 🛠 Сборка и запуск
-
-1.  **Клонирование репозитория**
+1.  **Cloning the repository**
     ```bash
     git clone https://github.com/FSHE-IIoT/stm32-button-spi-7seg.git
     cd stm32-button-spi-7seg
     ```
 
-2.  **Открытие проекта**
-    *   Запустите STM32CubeIDE.
-    *   Выберите `File -> Import -> General -> Existing Projects into Workspace`.
-    *   Укажите путь к папке проекта. Проект должен появиться в списке.
+2.  **Opening the Project**
+    *   Launch STM32CubeIDE.
+    *   Select `File -> Import -> General -> Existing Projects into Workspace`.
+    *   Specify the path to the project folder. The project should appear in the list.
 
-3.  **Сборка проекта**
-    *   В IDE откройте файл button_counter.ioc.
-    *   В панеле инструментов нажмите на значок `Device Configuration Tool Code Generation`.
-    *   Нажмите на значок молотка (`Build` или `Ctrl+B`).
+3.  **Building the Projectа**
+    *   In the IDE, open the file button_counter.ioc.
+    *   In the toolbar, click on the `Device Configuration Tool Code Generation`.
+    *   Click on the hammer icon (`Build` or `Ctrl+B`).
 
-4.  **Прошивка МК**
-    *   Подключите отладочную плату (например, ST-Link) к компьютеру и МК.
-    *   Нажмите на значок "жучка" (`Debug` или `F11`). Среда сама соберёт проект (если надо) и прошьёт его.
+4.  **Flashing the Microcontroller (MCU)**
+    *   Connect the debug adapter (e.g., ST-Link) to your computer and to the MCU.
+    *   Click on the "bug" icon (`Debug` or `F11`). The IDE will automatically build the project (if necessary) and flash it.
 
-5.  **Запуск**
-    *   После прошивки программа запустится. Нажимайте на кнопку и наблюдайте за изменением числа на индикаторе.
+5.  **Running the Program**
+    *   After flashing, the program will start running. Press the button and observe the number change on the display.
 
-## 📁 Структура проекта
+## 📁 Project Structure
     
     stm32-button-spi-7seg/
     │
     ├── Core/
     │   ├── Inc/
-    │   │   ├── main.h              // Главный заголовочный файл, сгенерированный CubeMX
-    │   │   ├── stm32f4xx_hal_conf.h // Конфигурация HAL
-    │   │   └── btn_counter.h       // Пользовательский заголовок: API для работы с кнопкой, счетчиком и дисплеем
+    │   │   ├── main.h              // Main header file generated by CubeMX
+    │   │   ├── stm32f4xx_hal_conf.h // HAL configuration
+    │   │   └── btn_counter.h       // Custom header: API for button, counter and display handling
     │   │
     │   └── Src/
-    │       ├── main.c              // Главный файл: инициализация, основной цикл, обработка прерываний
-    │       ├── stm32f4xx_it.c      // Файл обработчиков прерываний (содержит EXTI3_IRQHandler)
-    │       ├── stm32f4xx_hal_msp.c // HAL-овская инициализация периферии
-    │       └── btn_counter.c       // Реализация всей логики счетчика, дисплея и передачи по SPI
+    │       ├── main.c              // Main file: initialization, main loop, interrupt handling
+    │       ├── stm32f4xx_it.c      // Interrupt handlers file (contains EXTI3_IRQHandler)
+    │       ├── stm32f4xx_hal_msp.c // HAL peripheral initialization
+    │       └── btn_counter.c       // Implementation of all counter logic, display and SPI transmission
     │
-    ├── Drivers/                    // Библиотеки STM32CubeF4 (добавляются автоматически средой)
-    ├── STM32F401CCUx_FLASH.ld     // Скрипт линковки
-    └── button_counter.ioc         // Файл конфигурации CubeMX
+    ├── Drivers/                    // STM32CubeF4 libraries (added automatically by the environment)
+    ├── STM32F401CCUx_FLASH.ld     // Linker script
+    └── button_counter.ioc         // CubeMX configuration file
     
-### Ключевые модули и их взаимодействие:
+### Key Modules and Their Interaction:
 
 1.  **`main.c:`**
 
-    *   Выполняет инициализацию HAL, системного тактирования и периферии (через `MX_*_Init()`).
-    *   Инициализирует пользовательские модули, вызывая функции из `btn_counter.c`.
-    *   В бесконечном цикле (`while (1)`) постоянно обновляет дисплей, получая актуальное значение счетчика.
+    *   Initializes the HAL, system clock, and peripherals (via `MX_*_Init()` functions).
+    *   Initializes custom modules by calling functions from  `btn_counter.c`.
+    *   In the infinite loop (`while (1)`) continuously updates the display by fetching the current counter value.
 
 2.  **`btn_counter.h` / `btn_counter.c`:**
 
-    *   **Cердце проекта.** Содержит всю пользовательскую логику.
-    *   `Display_InitTypeDef`: Структура для настройки пинов управления разрядами дисплея.
-    *   `led_init()`, `btn_init()`, `transmit_init()`, `display_init()`: Функции инициализации.
-    *   `get_counter()`: Функция для получения текущего значения счётчика.
-    *   `update_display()`: Функция для динамической индикации (мультиплексирования).
-    *   `HAL_GPIO_EXTI_Callback()`: **Обработчик прерывания по кнопке**. Инкрементирует счётчик и переключает светодиод.
+    *   **The heart of the project.** Contains all the user logic.
+    *   `Display_InitTypeDef`: Structure for configuring the display digit control pins.
+    *   `led_init()`, `btn_init()`, `transmit_init()`, `display_init()`: Initialization functions.
+    *   `get_counter()`: Function to get the current counter value.
+    *   `update_display()`: Function for dynamic indication (multiplexing).
+    *   `HAL_GPIO_EXTI_Callback()`: **Button interrupt handler**. Increments the counter and toggles the LED.
 
-3.  **`stm32fxx_it.c:`(автоматически генерируется при компиляции проекта)**
+3.  **`stm32fxx_it.c:`(automatically generated when the project is compiled)**
 
-    *   Содержит вектор прерываний. Прерывание от кнопки (PA3 -> EXTI3) обрабатывается здесь в функции `EXTI3_IRQHandler()`, которая, в свою очередь, вызывает HAL-овский механизм и приводит к выполнению `HAL_GPIO_EXTI_Callback()` в `btn_counter.c`.
+    *   Contains the interrupt vector table. The button interrupt (PA3 -> EXTI3) is handled here in the `EXTI3_IRQHandler()` function, which in turn calls the HAL mechanism and ultimately leads to the execution of  `HAL_GPIO_EXTI_Callback()` in `btn_counter.c`.
 
 4.  **`button_counter.ioc`:**
 
-    *   Визуальная конфигурация пинов и периферии в STM32CubeMX. Здесь настроены:
-        *   SPI3 в режиме Master.
-        *   Пины PA5 (LED) и PB4 (Chip Select) как GPIO Output.
-        *   Пин PA3 (Кнопка) как GPIO External Interrupt.
-        *   Пины PB1, PB2, PB10 (Разряды дисплея) как GPIO Output.
+    *   Visual configuration of pins and peripherals in STM32CubeMX. The following settings are configured here:
+        *   SPI3 in Master mode.
+        *   Pins PA5 (LED) and PB4 (Chip Select) as GPIO Output.
+        *   Pin PA3 (Button) as GPIO External Interrupt.
+        *   Pins PB1, PB2, PB10 (Display digits) as GPIO Output.
 
-## 👨💻 Автор
+## 👨💻 Author
 
 **Oleg Dobrovolsky**
+FSHE IIoT - Full Stack Hardware Engineer, Industrial Internet of Things
 
-## 📄 Лицензия
+## 📄 License
 
-Этот проект распространяется под лицензией MIT. Подробнее см. [LICENSE](https://opensource.org/licenses/MIT)
+This project is distributed under the MIT License. For more information, see [LICENSE](https://opensource.org/licenses/MIT)
