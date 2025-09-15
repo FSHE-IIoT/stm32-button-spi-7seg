@@ -147,7 +147,7 @@ On each button press, the counter value increments (from 0 to 999, then it reset
 
 ## 👨💻 Author
 
-**Oleg Dobrovolsky**
+**Oleg Dobrovolsky**  
 
 FSHE IIoT - Full Stack Hardware Engineer, Industrial Internet of Things
 
