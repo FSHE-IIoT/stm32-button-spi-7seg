@@ -150,7 +150,7 @@
 
 ## 👨💻 Автор
 
-**Oleg Dobrovolsky**  
+**Oleg Dobrovolsky**  <br>
 
 FSHE IIoT - Full Stack Hardware Engineer, Industrial Internet of Things
 
