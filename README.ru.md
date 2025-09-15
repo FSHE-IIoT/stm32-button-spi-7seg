@@ -151,6 +151,7 @@
 ## 👨💻 Автор
 
 **Oleg Dobrovolsky**
+
 FSHE IIoT - Full Stack Hardware Engineer, Industrial Internet of Things
 
 ## 📄 Лицензия
